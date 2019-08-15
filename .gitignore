@@ -4,7 +4,7 @@ npm-debug.log
 
 # TypeScript
 src/compiled
-/dist
+# /dist -- adding dist, so we can pull it directly from github
 
 # JetBrains
 .idea
