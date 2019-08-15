@@ -1,5 +1,6 @@
 export * from './converters/json-model/json-model.converter';
 
+export * from './decorators/has-one.decorator';
 export * from './decorators/has-many.decorator';
 export * from './decorators/belongs-to.decorator';
 export * from './decorators/attribute.decorator';

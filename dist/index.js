@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 tslib_1.__exportStar(require("./converters/json-model/json-model.converter"), exports);
+tslib_1.__exportStar(require("./decorators/has-one.decorator"), exports);
 tslib_1.__exportStar(require("./decorators/has-many.decorator"), exports);
 tslib_1.__exportStar(require("./decorators/belongs-to.decorator"), exports);
 tslib_1.__exportStar(require("./decorators/attribute.decorator"), exports);
