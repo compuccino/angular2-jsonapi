@@ -9,7 +9,8 @@
     "max-line-length": [true, 120],
     "no-increment-decrement": false,
     "prefer-array-literal": false,
-    "ter-arrow-parens": [true, "always"],
+    "ter-arrow-parens": [false],
+    "no-parameter-reassignment": false,
     "ter-indent": [true, 2, {
       "SwitchCase": 1
     }],

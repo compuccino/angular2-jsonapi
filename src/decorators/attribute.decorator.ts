@@ -2,9 +2,15 @@ import { AttributeMetadata } from '../constants/symbols';
 import { AttributeDecoratorOptions } from '../interfaces/attribute-decorator-options.interface';
 import { DateConverter } from '../converters/date/date.converter';
 
-export function Attribute(options: AttributeDecoratorOptions = {}): PropertyDecorator {
+export function Attribute(
+  options: AttributeDecoratorOptions = {}
+): PropertyDecorator {
   return function (target: any, propertyName: string) {
-    const converter = function (dataType: any, value: any, forSerialisation = false): any {
+    const converter = function (
+      dataType: any,
+      value: any,
+      forSerialisation = false
+    ): any {
       let attrConverter;
 
       if (options.converter) {
@@ -22,9 +28,8 @@ export function Attribute(options: AttributeDecoratorOptions = {}): PropertyDeco
       if (attrConverter) {
         if (!forSerialisation) {
           return attrConverter.mask(value);
-        } else {
-          return attrConverter.unmask(value);
         }
+        return attrConverter.unmask(value);
       }
 
       return value;
@@ -39,8 +44,12 @@ export function Attribute(options: AttributeDecoratorOptions = {}): PropertyDeco
 
       Reflect.defineMetadata('Attribute', metadata, target);
 
-      const mappingMetadata = Reflect.getMetadata('AttributeMapping', target) || {};
-      const serializedPropertyName = options.serializedName !== undefined ? options.serializedName : propertyName;
+      const mappingMetadata =
+        Reflect.getMetadata('AttributeMapping', target) || {};
+      const serializedPropertyName =
+        options.serializedName !== undefined
+          ? options.serializedName
+          : propertyName;
       mappingMetadata[serializedPropertyName] = propertyName;
       Reflect.defineMetadata('AttributeMapping', mappingMetadata, target);
     };
@@ -52,13 +61,18 @@ export function Attribute(options: AttributeDecoratorOptions = {}): PropertyDeco
       newValue: any,
       isNew: boolean
     ) {
-      const targetType = Reflect.getMetadata('design:type', target, propertyName);
+      const targetType = Reflect.getMetadata(
+        'design:type',
+        target,
+        propertyName
+      );
 
       if (!instance[AttributeMetadata]) {
         instance[AttributeMetadata] = {};
       }
 
-      const propertyHasDirtyAttributes = typeof oldValue === 'undefined' && !isNew ? false : hasDirtyAttributes;
+      const propertyHasDirtyAttributes =
+        typeof oldValue === 'undefined' && !isNew ? false : hasDirtyAttributes;
 
       instance[AttributeMetadata][propertyName] = {
         newValue,
@@ -74,7 +88,11 @@ export function Attribute(options: AttributeDecoratorOptions = {}): PropertyDeco
     };
 
     const setter = function (newVal: any) {
-      const targetType = Reflect.getMetadata('design:type', target, propertyName);
+      const targetType = Reflect.getMetadata(
+        'design:type',
+        target,
+        propertyName
+      );
       const convertedValue = converter(targetType, newVal);
 
       if (convertedValue !== this['_' + propertyName]) {
