@@ -23,7 +23,7 @@ export type ModelType<T extends JsonApiModel> = {
 @Injectable()
 export class JsonApiDatastore {
   // tslint:disable:variable-name
-  private _headers: Headers;
+  private _headers: HttpHeaders;
   private _store: { [type: string]: { [id: string]: JsonApiModel } } = {};
   // tslint:disable:max-line-length
   private getDirtyAttributes: Function =
