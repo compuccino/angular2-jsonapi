@@ -8,7 +8,7 @@
     "target": "ES5",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
+    "sourceMap": true,    
     "declaration": true,
     "outDir": "./dist",
     "lib": [
@@ -23,7 +23,13 @@
       "selenium-webdriver",
       "lodash",
       "reflect-metadata"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@angular/*": [
+        "../node_modules/@angular/*"
+      ]
+}    
   },
   "files": [
     "src/index.ts"
@@ -36,8 +42,8 @@
     "node_modules/@types"
   ],
   "awesomeTypescriptLoaderOptions": {
-    "sourceMap": false,
-    "inlineSourceMap": true
+    "sourceMap": true,
+    "inlineSourceMap": false
   },
   "angularCompilerOptions": {
     "genDir": "src/compiled"

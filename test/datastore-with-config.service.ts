@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { JsonApiDatastore, JsonApiDatastoreConfig, DatastoreConfig } from '../src';
+import { HttpClient } from '@angular/common/http';
+import {
+    DatastoreConfig,
+    JsonApiDatastore,
+    JsonApiDatastoreConfig
+} from '../src';
 import { Author } from './models/author.model';
 import { Book } from './models/book.model';
 import { Chapter } from './models/chapter.model';
@@ -12,21 +15,21 @@ export const BASE_URL_FROM_CONFIG = 'http://localhost:8888';
 export const API_VERSION_FROM_CONFIG = 'v2';
 
 @JsonApiDatastoreConfig({
-  baseUrl: BASE_URL,
-  apiVersion: API_VERSION,
-  models: {
-    authors: Author,
-    books: Book,
-    chapters: Chapter
-  }
+    baseUrl: BASE_URL,
+    apiVersion: API_VERSION,
+    models: {
+        authors: Author,
+        books: Book,
+        chapters: Chapter
+    }
 })
 export class DatastoreWithConfig extends JsonApiDatastore {
-  protected config: DatastoreConfig = {
-    baseUrl: BASE_URL_FROM_CONFIG,
-    apiVersion: API_VERSION_FROM_CONFIG
-  };
+    protected config: DatastoreConfig = {
+        baseUrl: BASE_URL_FROM_CONFIG,
+        apiVersion: API_VERSION_FROM_CONFIG
+    };
 
-  constructor(http: Http) {
-    super(http);
-  }
+    constructor(http: HttpClient) {
+        super(http);
+    }
 }
