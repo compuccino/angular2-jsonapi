@@ -260,9 +260,8 @@ export class JsonApiDatastore {
 
     if (withMeta && withMeta === true) {
       return new JsonApiQueryData(models, this.parseMeta(body, modelType));
-    } else {
-      return models;
     }
+    return models;    
   }
 
   private deserializeModel<T extends JsonApiModel>(modelType: ModelType<T>, data: any) {
@@ -282,7 +281,7 @@ export class JsonApiDatastore {
       Object.assign(model, body.data.attributes);
     }
 
-    // tslint:disable-next-line:no-param-reassign
+    // tslint:disable-next-line
     model = model || this.deserializeModel(modelType, body.data);
 
     this.addToStore(model);
@@ -294,7 +293,7 @@ export class JsonApiDatastore {
     return model;
   }
 
-  protected handleError(error: any): ErrorObservable {
+  protected handleError(error: any): Observable<any> {
     // tslint:disable-next-line:max-line-length
     const errMsg: string = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
 
@@ -363,7 +362,7 @@ export class JsonApiDatastore {
 
   private resetMetadataAttributes<T extends JsonApiModel>(res: T, attributesMetadata: any, modelType: ModelType<T>) {
     // TODO check why is attributesMetadata from the arguments never used
-    // tslint:disable-next-line:no-param-reassign
+    // tslint:disable-next-line
     attributesMetadata = res[AttributeMetadata];
 
     for (const propertyName in attributesMetadata) {
